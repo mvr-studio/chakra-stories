@@ -1,0 +1,144 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import ModalStories from './'
+import { Box, useDisclosure, Button, Heading, Text } from '@chakra-ui/react'
+
+<Meta title="Components/ModalStories" component={ModalStories} />
+
+# ModalStories
+
+## Basic
+
+<Canvas>
+  <Story name="Basic">
+    {() => {
+      const { isOpen, onClose, onOpen } = useDisclosure()
+      return (
+        <Box>
+          <Button onClick={onOpen}>Open Stories</Button>
+          <ModalStories isOpen={isOpen} onClose={onClose}>
+            <Box>
+              <Heading>Chakra Stories</Heading>
+              <Text marginTop="1rem">Welcome to a super simple Instagram like stories component for Chakra UI.</Text>
+              <Text marginTop="1rem">Click the right area of this card to navigate to the next story.</Text>
+            </Box>
+            <Box>
+              <Heading>Arrow Keys</Heading>
+              <Text marginTop="1rem">
+                For the navigation purposes, you can also use arrow keys to change the current story.
+              </Text>
+            </Box>
+            <Box>
+              <Heading>And that's it</Heading>
+              <Text marginTop="1rem">Have fun and let us know what do you think about it.</Text>
+            </Box>
+          </ModalStories>
+        </Box>
+      )
+    }}
+  </Story>
+</Canvas>
+
+## Timed Stories
+
+<Canvas>
+  <Story name="Timed Stories">
+    {() => {
+      const { isOpen, onClose, onOpen } = useDisclosure()
+      return (
+        <Box>
+          <Button onClick={onOpen}>Open Stories</Button>
+          <ModalStories isOpen={isOpen} onClose={onClose} storyDuration={5}>
+            <Box>First</Box>
+            <Box>Second</Box>
+            <Box>Third</Box>
+          </ModalStories>
+        </Box>
+      )
+    }}
+  </Story>
+</Canvas>
+
+## Handle Stories end
+
+<Canvas>
+  <Story name="Handle Stories end">
+    {() => {
+      const { isOpen, onClose, onOpen } = useDisclosure()
+      return (
+        <Box>
+          <Button onClick={onOpen}>Open Stories</Button>
+          <ModalStories isOpen={isOpen} onClose={onClose} storyDuration={5} onStoriesCompleted={onClose}>
+            <Box>First</Box>
+            <Box>Second</Box>
+            <Box>Third</Box>
+          </ModalStories>
+        </Box>
+      )
+    }}
+  </Story>
+</Canvas>
+
+## Container Aspect Ratio
+
+<Canvas>
+  <Story name="Container Aspect Ratio">
+    {() => {
+      const { isOpen, onClose, onOpen } = useDisclosure()
+      return (
+        <Box>
+          <Button onClick={onOpen}>Open Stories</Button>
+          <ModalStories isOpen={isOpen} onClose={onClose} storyDuration={5} aspectRatio={2}>
+            <Box>First</Box>
+            <Box>Second</Box>
+            <Box>Third</Box>
+          </ModalStories>
+        </Box>
+      )
+    }}
+  </Story>
+</Canvas>
+
+## Container Styling
+
+<Canvas>
+  <Story name="Container Styling">
+    {() => {
+      const { isOpen, onClose, onOpen } = useDisclosure()
+      return (
+        <Box>
+          <Button onClick={onOpen}>Open Stories</Button>
+          <ModalStories isOpen={isOpen} onClose={onClose} storyDuration={5} backgroundColor="teal.50" borderRadius={0}>
+            <Box>First</Box>
+            <Box>Second</Box>
+            <Box>Third</Box>
+          </ModalStories>
+        </Box>
+      )
+    }}
+  </Story>
+</Canvas>
+
+## Indicator Customization
+
+<Canvas>
+  <Story name="Indicator Customization">
+    {() => {
+      const { isOpen, onClose, onOpen } = useDisclosure()
+      return (
+        <Box>
+          <Button onClick={onOpen}>Open Stories</Button>
+          <ModalStories
+            isOpen={isOpen}
+            onClose={onClose}
+            storyDuration={5}
+            indicator={{ activeColor: 'red.300', inactiveColor: 'yellow.200' }}
+          >
+            <Box>First</Box>
+            <Box>Second</Box>
+            <Box>Third</Box>
+          </ModalStories>
+        </Box>
+      )
+    }}
+  </Story>
+</Canvas>

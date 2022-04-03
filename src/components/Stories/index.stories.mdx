@@ -1,0 +1,43 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Stories from './'
+import { Box, Heading } from '@chakra-ui/react'
+
+<Meta title="Components/Stories" component={Stories} />
+
+# Stories
+
+## Basic
+
+<Canvas>
+  <Story name="Basic">
+    <Stories>
+      <Box>First</Box>
+      <Box>Second</Box>
+      <Box>Third</Box>
+    </Stories>
+  </Story>
+</Canvas>
+
+## Timed Stories
+
+<Canvas>
+  <Story name="Timed Stories">
+    <Stories storyDuration={5}>
+      <Box>First</Box>
+      <Box>Second</Box>
+      <Box>Third</Box>
+    </Stories>
+  </Story>
+</Canvas>
+
+## Handle Stories end
+
+<Canvas>
+  <Story name="Handle Stories end">
+    <Stories storyDuration={5} onStoriesCompleted={() => alert(`And it's done`)}>
+      <Box>First</Box>
+      <Box>Second</Box>
+      <Box>Third</Box>
+    </Stories>
+  </Story>
+</Canvas>
