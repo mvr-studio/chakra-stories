@@ -6,7 +6,7 @@
   "homepage": "https://github.com/mvr-studio/chakra-stories",
   "bugs": "https://github.com/mvr-studio/chakra-stories/issues",
   "type": "module",
-  "main": "dist/cjs/index.js",
+  "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "scripts": {
