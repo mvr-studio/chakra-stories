@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { StoriesProps } from '../Stories';
+import { StoriesProps } from '../Stories/index';
 interface ModalStoriesProps extends StoriesProps {
     isOpen: boolean;
     onClose: () => void;

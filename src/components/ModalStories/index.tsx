@@ -1,6 +1,6 @@
 import { CloseIcon } from '@chakra-ui/icons'
 import { IconButton, Modal, ModalContent, ModalOverlay } from '@chakra-ui/react'
-import Stories, { StoriesProps } from '../Stories'
+import Stories, { StoriesProps } from '../Stories/index'
 
 interface ModalStoriesProps extends StoriesProps {
   isOpen: boolean
