@@ -7,8 +7,8 @@
   "bugs": "https://github.com/mvr-studio/chakra-stories/issues",
   "type": "module",
   "main": "dist/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "storybook": "start-storybook -p 6006",
