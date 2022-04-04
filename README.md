@@ -75,6 +75,7 @@ const View = () => {
 - isOpen: `boolean`
 - onClose: `() => void`
 - modalContentProps?: `ModalContentProps` - Accepts similar props to box. Refer to Chakra UI docs.
+- onDragUp: `({ currentStory, storiesCount }) => void` - Callback for handling user's drag up gesture.
 
 ## External links
 
