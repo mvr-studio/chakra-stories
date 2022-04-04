@@ -79,26 +79,6 @@ import { Box, useDisclosure, Button, Heading, Text, HStack, Avatar, Flex, Center
   </Story>
 </Canvas>
 
-## Container Aspect Ratio
-
-<Canvas>
-  <Story name="Container Aspect Ratio">
-    {() => {
-      const { isOpen, onClose, onOpen } = useDisclosure()
-      return (
-        <Box>
-          <Button onClick={onOpen}>Open Stories</Button>
-          <ModalStories isOpen={isOpen} onClose={onClose} storyDuration={5} aspectRatio={2}>
-            <Box>First</Box>
-            <Box>Second</Box>
-            <Box>Third</Box>
-          </ModalStories>
-        </Box>
-      )
-    }}
-  </Story>
-</Canvas>
-
 ## Container Styling
 
 <Canvas>

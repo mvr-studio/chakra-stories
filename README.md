@@ -36,7 +36,6 @@ const View = () => {
 - children: `ReactNode[]`
 - storyDuration?: `number` - Duration of each story in seconds.
 - onStoriesCompleted?: `() => void` - Callback to fire when the last story finishes.
-- aspectRatio?: `number` - Custom aspect ratio of stories container.
 - indicator?:
   - activeColor?: `string` - Animated indicator active color.
   - inactiveColor?: `string` - Inactive indicator color.
@@ -75,6 +74,7 @@ const View = () => {
 - All the properties of `Stories`
 - isOpen: `boolean`
 - onClose: `() => void`
+- modalContentProps?: `ModalContentProps` - Accepts similar props to box. Refer to Chakra UI docs.
 
 ## External links
 

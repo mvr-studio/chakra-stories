@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ReactNode, useEffect, useState } from 'react'
-import { Box, AspectRatio, Flex, HStack, FlexProps } from '@chakra-ui/react'
+import { Box, Flex, HStack, FlexProps } from '@chakra-ui/react'
 import { install } from '@github/hotkey'
 import { motion, useAnimation } from 'framer-motion'
 
@@ -25,7 +25,6 @@ export interface StoriesProps extends FlexProps {
   children: ReactNode[]
   storyDuration?: number
   onStoriesCompleted?: () => void
-  aspectRatio?: number
   indicator?: IndicatorProps
   components?: ComponentsProps
   isDragging?: boolean
@@ -33,7 +32,6 @@ export interface StoriesProps extends FlexProps {
 
 const Stories = ({
   children,
-  aspectRatio = 0.75,
   storyDuration,
   onStoriesCompleted,
   indicator,
@@ -103,72 +101,64 @@ const Stories = ({
   }, [currentStoryId])
 
   return (
-    <AspectRatio ratio={aspectRatio}>
-      <Flex direction="column" backgroundColor="white" borderRadius="1rem" position="relative" {...rest}>
-        <HStack width="100%" padding="0.5rem 0.75rem">
-          {children.map((_, storyId) => {
-            const activeOrShown = isStoryActive(storyId) || wasStoryShown(storyId)
-            const indicatorColor = activeOrShown
-              ? indicator?.activeColor || 'teal.400'
-              : indicator?.inactiveColor || 'gray.200'
-            return (
+    <Flex direction="column" backgroundColor="white" borderRadius="1rem" position="relative" {...rest}>
+      <HStack width="100%" padding="0.5rem 0.75rem">
+        {children.map((_, storyId) => {
+          const activeOrShown = isStoryActive(storyId) || wasStoryShown(storyId)
+          const indicatorColor = activeOrShown
+            ? indicator?.activeColor || 'teal.400'
+            : indicator?.inactiveColor || 'gray.200'
+          return (
+            <Box key={storyId} flex={1} padding="0.5rem 0.125rem" cursor="pointer" onClick={() => changeStory(storyId)}>
               <Box
-                key={storyId}
-                flex={1}
-                padding="0.5rem 0.125rem"
-                cursor="pointer"
-                onClick={() => changeStory(storyId)}
+                height="0.25rem"
+                backgroundColor={indicator?.inactiveColor || 'gray.200'}
+                borderRadius="0.25rem"
+                position="relative"
               >
-                <Box
+                <MotionBox
                   height="0.25rem"
-                  backgroundColor={indicator?.inactiveColor || 'gray.200'}
+                  backgroundColor={indicatorColor}
                   borderRadius="0.25rem"
-                  position="relative"
-                >
-                  <MotionBox
-                    height="0.25rem"
-                    backgroundColor={indicatorColor}
-                    borderRadius="0.25rem"
-                    position="absolute"
-                    top={0}
-                    left={0}
-                    width={wasStoryShown(storyId) || !storyDuration ? '100%' : '1%'}
-                    animate={isStoryActive(storyId) ? indicatorAnimation : null}
-                  />
-                </Box>
+                  position="absolute"
+                  top={0}
+                  left={0}
+                  width={wasStoryShown(storyId) || !storyDuration ? '100%' : '1%'}
+                  animate={isStoryActive(storyId) ? indicatorAnimation : null}
+                />
               </Box>
-            )
-          })}
-        </HStack>
-        <Flex direction="column" flex={1} position="relative" width="100%" padding="0 1rem">
-          {TopBar && <TopBar currentStory={currentStoryId + 1} storiesCount={children.length} />}
-          <Box flex={1} position="relative">
-            {children[currentStoryId]}
-            <Box
-              position="absolute"
-              top={0}
-              left={0}
-              bottom={0}
-              right="50%"
-              cursor="pointer"
-              onClick={!isDragging ? goBack : undefined}
-              data-hotkey="ArrowLeft"
-            />
-            <Box
-              position="absolute"
-              top={0}
-              left="50%"
-              bottom={0}
-              right={0}
-              cursor="pointer"
-              data-hotkey="ArrowRight"
-              onClick={!isDragging ? goNext : undefined}
-            />
-          </Box>
-          {BottomBar && <BottomBar currentStory={currentStoryId + 1} storiesCount={children.length} />}
-        </Flex>
+            </Box>
+          )
+        })}
+      </HStack>
+      <Flex direction="column" flex={1} position="relative" width="100%" padding="0 1rem">
+        {TopBar && <TopBar currentStory={currentStoryId + 1} storiesCount={children.length} />}
+        <Box flex={1} position="relative">
+          {children[currentStoryId]}
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            bottom={0}
+            right="50%"
+            cursor="pointer"
+            onClick={!isDragging ? goBack : undefined}
+            data-hotkey="ArrowLeft"
+          />
+          <Box
+            position="absolute"
+            top={0}
+            left="50%"
+            bottom={0}
+            right={0}
+            cursor="pointer"
+            data-hotkey="ArrowRight"
+            onClick={!isDragging ? goNext : undefined}
+          />
+        </Box>
+        {BottomBar && <BottomBar currentStory={currentStoryId + 1} storiesCount={children.length} />}
       </Flex>
-    </AspectRatio>
+    </Flex>
   )
 }
 

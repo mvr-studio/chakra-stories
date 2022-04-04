@@ -16,10 +16,9 @@ export interface StoriesProps extends FlexProps {
     children: ReactNode[];
     storyDuration?: number;
     onStoriesCompleted?: () => void;
-    aspectRatio?: number;
     indicator?: IndicatorProps;
     components?: ComponentsProps;
     isDragging?: boolean;
 }
-declare const Stories: ({ children, aspectRatio, storyDuration, onStoriesCompleted, indicator, components, isDragging, ...rest }: StoriesProps) => JSX.Element;
+declare const Stories: ({ children, storyDuration, onStoriesCompleted, indicator, components, isDragging, ...rest }: StoriesProps) => JSX.Element;
 export default Stories;

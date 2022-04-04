@@ -20,12 +20,12 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
-import { Box, AspectRatio, Flex, HStack } from '@chakra-ui/react';
+import { Box, Flex, HStack } from '@chakra-ui/react';
 import { install } from '@github/hotkey';
 import { motion, useAnimation } from 'framer-motion';
 const MotionBox = motion(Box);
 const Stories = (_a) => {
-    var { children, aspectRatio = 0.75, storyDuration, onStoriesCompleted, indicator, components, isDragging } = _a, rest = __rest(_a, ["children", "aspectRatio", "storyDuration", "onStoriesCompleted", "indicator", "components", "isDragging"]);
+    var { children, storyDuration, onStoriesCompleted, indicator, components, isDragging } = _a, rest = __rest(_a, ["children", "storyDuration", "onStoriesCompleted", "indicator", "components", "isDragging"]);
     const [currentStoryId, setCurrentStoryId] = useState(0);
     const isStoryActive = (storyId) => storyId === currentStoryId;
     const wasStoryShown = (storyId) => storyId < currentStoryId;
@@ -82,12 +82,12 @@ const Stories = (_a) => {
         run();
         return () => indicatorAnimation.stop();
     }, [currentStoryId]);
-    return (_jsx(AspectRatio, Object.assign({ ratio: aspectRatio }, { children: _jsxs(Flex, Object.assign({ direction: "column", backgroundColor: "white", borderRadius: "1rem", position: "relative" }, rest, { children: [_jsx(HStack, Object.assign({ width: "100%", padding: "0.5rem 0.75rem" }, { children: children.map((_, storyId) => {
-                        const activeOrShown = isStoryActive(storyId) || wasStoryShown(storyId);
-                        const indicatorColor = activeOrShown
-                            ? (indicator === null || indicator === void 0 ? void 0 : indicator.activeColor) || 'teal.400'
-                            : (indicator === null || indicator === void 0 ? void 0 : indicator.inactiveColor) || 'gray.200';
-                        return (_jsx(Box, Object.assign({ flex: 1, padding: "0.5rem 0.125rem", cursor: "pointer", onClick: () => changeStory(storyId) }, { children: _jsx(Box, Object.assign({ height: "0.25rem", backgroundColor: (indicator === null || indicator === void 0 ? void 0 : indicator.inactiveColor) || 'gray.200', borderRadius: "0.25rem", position: "relative" }, { children: _jsx(MotionBox, { height: "0.25rem", backgroundColor: indicatorColor, borderRadius: "0.25rem", position: "absolute", top: 0, left: 0, width: wasStoryShown(storyId) || !storyDuration ? '100%' : '1%', animate: isStoryActive(storyId) ? indicatorAnimation : null }) })) }), storyId));
-                    }) })), _jsxs(Flex, Object.assign({ direction: "column", flex: 1, position: "relative", width: "100%", padding: "0 1rem" }, { children: [TopBar && _jsx(TopBar, { currentStory: currentStoryId + 1, storiesCount: children.length }), _jsxs(Box, Object.assign({ flex: 1, position: "relative" }, { children: [children[currentStoryId], _jsx(Box, { position: "absolute", top: 0, left: 0, bottom: 0, right: "50%", cursor: "pointer", onClick: !isDragging ? goBack : undefined, "data-hotkey": "ArrowLeft" }), _jsx(Box, { position: "absolute", top: 0, left: "50%", bottom: 0, right: 0, cursor: "pointer", "data-hotkey": "ArrowRight", onClick: !isDragging ? goNext : undefined })] })), BottomBar && _jsx(BottomBar, { currentStory: currentStoryId + 1, storiesCount: children.length })] }))] })) })));
+    return (_jsxs(Flex, Object.assign({ direction: "column", backgroundColor: "white", borderRadius: "1rem", position: "relative" }, rest, { children: [_jsx(HStack, Object.assign({ width: "100%", padding: "0.5rem 0.75rem" }, { children: children.map((_, storyId) => {
+                    const activeOrShown = isStoryActive(storyId) || wasStoryShown(storyId);
+                    const indicatorColor = activeOrShown
+                        ? (indicator === null || indicator === void 0 ? void 0 : indicator.activeColor) || 'teal.400'
+                        : (indicator === null || indicator === void 0 ? void 0 : indicator.inactiveColor) || 'gray.200';
+                    return (_jsx(Box, Object.assign({ flex: 1, padding: "0.5rem 0.125rem", cursor: "pointer", onClick: () => changeStory(storyId) }, { children: _jsx(Box, Object.assign({ height: "0.25rem", backgroundColor: (indicator === null || indicator === void 0 ? void 0 : indicator.inactiveColor) || 'gray.200', borderRadius: "0.25rem", position: "relative" }, { children: _jsx(MotionBox, { height: "0.25rem", backgroundColor: indicatorColor, borderRadius: "0.25rem", position: "absolute", top: 0, left: 0, width: wasStoryShown(storyId) || !storyDuration ? '100%' : '1%', animate: isStoryActive(storyId) ? indicatorAnimation : null }) })) }), storyId));
+                }) })), _jsxs(Flex, Object.assign({ direction: "column", flex: 1, position: "relative", width: "100%", padding: "0 1rem" }, { children: [TopBar && _jsx(TopBar, { currentStory: currentStoryId + 1, storiesCount: children.length }), _jsxs(Box, Object.assign({ flex: 1, position: "relative" }, { children: [children[currentStoryId], _jsx(Box, { position: "absolute", top: 0, left: 0, bottom: 0, right: "50%", cursor: "pointer", onClick: !isDragging ? goBack : undefined, "data-hotkey": "ArrowLeft" }), _jsx(Box, { position: "absolute", top: 0, left: "50%", bottom: 0, right: 0, cursor: "pointer", "data-hotkey": "ArrowRight", onClick: !isDragging ? goNext : undefined })] })), BottomBar && _jsx(BottomBar, { currentStory: currentStoryId + 1, storiesCount: children.length })] }))] })));
 };
 export default Stories;
