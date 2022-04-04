@@ -28,6 +28,7 @@ export interface StoriesProps extends FlexProps {
   aspectRatio?: number
   indicator?: IndicatorProps
   components?: ComponentsProps
+  isDragging?: boolean
 }
 
 const Stories = ({
@@ -37,6 +38,7 @@ const Stories = ({
   onStoriesCompleted,
   indicator,
   components,
+  isDragging,
   ...rest
 }: StoriesProps) => {
   const [currentStoryId, setCurrentStoryId] = useState(0)
@@ -149,7 +151,7 @@ const Stories = ({
               bottom={0}
               right="50%"
               cursor="pointer"
-              onClick={goBack}
+              onClick={!isDragging ? goBack : undefined}
               data-hotkey="ArrowLeft"
             />
             <Box
@@ -159,8 +161,8 @@ const Stories = ({
               bottom={0}
               right={0}
               cursor="pointer"
-              onClick={goNext}
               data-hotkey="ArrowRight"
+              onClick={!isDragging ? goNext : undefined}
             />
           </Box>
           {BottomBar && <BottomBar currentStory={currentStoryId + 1} storiesCount={children.length} />}

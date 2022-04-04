@@ -2,6 +2,12 @@ import * as React from 'react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { IconButton, Modal, ModalContent, ModalOverlay } from '@chakra-ui/react'
 import Stories, { StoriesProps } from '../Stories/index'
+import { motion, PanInfo } from 'framer-motion'
+
+const CLOSE_DRAG_THRESHOLD = 120
+const DRAG_END_PROPAGATION_TIMEOUT = 100
+
+const MotionModalContent = motion(ModalContent)
 
 interface ModalStoriesProps extends StoriesProps {
   isOpen: boolean
@@ -9,6 +15,15 @@ interface ModalStoriesProps extends StoriesProps {
 }
 
 const ModalStories = ({ isOpen, onClose, ...rest }: ModalStoriesProps) => {
+  const [isDragging, setIsDragging] = React.useState(false)
+
+  const onDragEnd = (_: unknown, info: PanInfo) => {
+    setTimeout(() => {
+      setIsDragging(false)
+    }, DRAG_END_PROPAGATION_TIMEOUT)
+    if (info.offset.y > CLOSE_DRAG_THRESHOLD) onClose()
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInBottom">
       <ModalOverlay />
@@ -26,9 +41,17 @@ const ModalStories = ({ isOpen, onClose, ...rest }: ModalStoriesProps) => {
         color="teal.300"
         size="sm"
       />
-      <ModalContent backgroundColor="transparent" boxShadow="none">
-        <Stories {...rest} />
-      </ModalContent>
+      <MotionModalContent
+        drag="y"
+        dragPropagation
+        dragConstraints={{ top: 0, bottom: 0 }}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={onDragEnd}
+        backgroundColor="transparent"
+        boxShadow="none"
+      >
+        <Stories {...rest} isDragging={isDragging} />
+      </MotionModalContent>
     </Modal>
   )
 }
