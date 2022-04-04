@@ -25,7 +25,7 @@ import { install } from '@github/hotkey';
 import { motion, useAnimation } from 'framer-motion';
 const MotionBox = motion(Box);
 const Stories = (_a) => {
-    var { children, storyDuration, onStoriesCompleted, indicator, components, isDragging } = _a, rest = __rest(_a, ["children", "storyDuration", "onStoriesCompleted", "indicator", "components", "isDragging"]);
+    var { children, storyDuration, onStoriesCompleted, indicator, components, isDragging, onStoryChange } = _a, rest = __rest(_a, ["children", "storyDuration", "onStoriesCompleted", "indicator", "components", "isDragging", "onStoryChange"]);
     const [currentStoryId, setCurrentStoryId] = useState(0);
     const isStoryActive = (storyId) => storyId === currentStoryId;
     const wasStoryShown = (storyId) => storyId < currentStoryId;
@@ -70,6 +70,7 @@ const Stories = (_a) => {
         }
     }, []);
     useEffect(() => {
+        onStoryChange && onStoryChange(currentStoryId);
         if (!storyDuration)
             return;
         const run = () => __awaiter(void 0, void 0, void 0, function* () {

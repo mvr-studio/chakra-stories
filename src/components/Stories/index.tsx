@@ -11,7 +11,7 @@ type IndicatorProps = {
   inactiveColor?: string
 }
 
-type ComponentCallbackArgs = {
+export type ComponentCallbackArgs = {
   currentStory: number
   storiesCount: number
 }
@@ -28,6 +28,7 @@ export interface StoriesProps extends FlexProps {
   indicator?: IndicatorProps
   components?: ComponentsProps
   isDragging?: boolean
+  onStoryChange?: (storyId: number) => void
 }
 
 const Stories = ({
@@ -37,6 +38,7 @@ const Stories = ({
   indicator,
   components,
   isDragging,
+  onStoryChange,
   ...rest
 }: StoriesProps) => {
   const [currentStoryId, setCurrentStoryId] = useState(0)
@@ -88,6 +90,7 @@ const Stories = ({
   }, [])
 
   useEffect(() => {
+    onStoryChange && onStoryChange(currentStoryId)
     if (!storyDuration) return
     const run = async () => {
       await runIndicatorAnimation()

@@ -191,3 +191,27 @@ import { Box, useDisclosure, Button, Heading, Text, HStack, Avatar, Flex, Center
     }}
   </Story>
 </Canvas>
+
+## Handle Drag Up
+
+<Canvas>
+  <Story name="Handle Drag Up">
+    {() => {
+      const { isOpen, onClose, onOpen } = useDisclosure()
+      const handleDragUp = ({ currentStory, storiesCount }) => {
+        console.log(`Story: ${currentStory}/${storiesCount}`)
+        window.open('https://mvr.studio', '_blank').focus()
+      }
+      return (
+        <Box>
+          <Button onClick={onOpen}>Open Stories</Button>
+          <ModalStories isOpen={isOpen} onClose={onClose} storyDuration={5} onDragUp={handleDragUp}>
+            <Box>First</Box>
+            <Box>Second</Box>
+            <Box>Third</Box>
+          </ModalStories>
+        </Box>
+      )
+    }}
+  </Story>
+</Canvas>

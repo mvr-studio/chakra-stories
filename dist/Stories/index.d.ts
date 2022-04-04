@@ -4,7 +4,7 @@ declare type IndicatorProps = {
     activeColor?: string;
     inactiveColor?: string;
 };
-declare type ComponentCallbackArgs = {
+export declare type ComponentCallbackArgs = {
     currentStory: number;
     storiesCount: number;
 };
@@ -19,6 +19,7 @@ export interface StoriesProps extends FlexProps {
     indicator?: IndicatorProps;
     components?: ComponentsProps;
     isDragging?: boolean;
+    onStoryChange?: (storyId: number) => void;
 }
-declare const Stories: ({ children, storyDuration, onStoriesCompleted, indicator, components, isDragging, ...rest }: StoriesProps) => JSX.Element;
+declare const Stories: ({ children, storyDuration, onStoriesCompleted, indicator, components, isDragging, onStoryChange, ...rest }: StoriesProps) => JSX.Element;
 export default Stories;
