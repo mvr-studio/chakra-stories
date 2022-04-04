@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "author": "Tomasz Marciniak <tomek@mvr.studio>",
-  "main": "/dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "storybook": "start-storybook -p 6006",
