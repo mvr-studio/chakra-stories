@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { ReactNode, useEffect, useState } from 'react'
 import { Box, AspectRatio, Flex, HStack, FlexProps } from '@chakra-ui/react'
 import { install } from '@github/hotkey'
