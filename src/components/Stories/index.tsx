@@ -10,12 +10,23 @@ type IndicatorProps = {
   inactiveColor?: string
 }
 
+type ComponentCallbackArgs = {
+  currentStory: number
+  storiesCount: number
+}
+
+type ComponentsProps = {
+  renderTopBar?: (args: ComponentCallbackArgs) => JSX.Element
+  renderBottomBar?: (args: ComponentCallbackArgs) => JSX.Element
+}
+
 export interface StoriesProps extends FlexProps {
   children: ReactNode[]
   storyDuration?: number
   onStoriesCompleted?: () => void
   aspectRatio?: number
   indicator?: IndicatorProps
+  components?: ComponentsProps
 }
 
 const Stories = ({
@@ -24,6 +35,7 @@ const Stories = ({
   storyDuration,
   onStoriesCompleted,
   indicator,
+  components,
   ...rest
 }: StoriesProps) => {
   const [currentStoryId, setCurrentStoryId] = useState(0)
@@ -32,6 +44,9 @@ const Stories = ({
   const hasPreviousStory = currentStoryId > 0
   const hasNextStory = currentStoryId < children.length - 1
   const isLastStory = currentStoryId === children.length - 1
+
+  const TopBar = components?.renderTopBar
+  const BottomBar = components?.renderBottomBar
 
   const indicatorAnimation = useAnimation()
 
@@ -122,28 +137,32 @@ const Stories = ({
             )
           })}
         </HStack>
-        <Flex flex={1} position="relative" width="100%" padding="0 1rem">
-          <Box flex={1}>{children[currentStoryId]}</Box>
-          <Box
-            position="absolute"
-            top={0}
-            left={0}
-            bottom={0}
-            right="50%"
-            cursor="pointer"
-            onClick={goBack}
-            data-hotkey="ArrowLeft"
-          />
-          <Box
-            position="absolute"
-            top={0}
-            left="50%"
-            bottom={0}
-            right={0}
-            cursor="pointer"
-            onClick={goNext}
-            data-hotkey="ArrowRight"
-          />
+        <Flex direction="column" flex={1} position="relative" width="100%" padding="0 1rem">
+          {TopBar && <TopBar currentStory={currentStoryId + 1} storiesCount={children.length} />}
+          <Box flex={1} position="relative">
+            {children[currentStoryId]}
+            <Box
+              position="absolute"
+              top={0}
+              left={0}
+              bottom={0}
+              right="50%"
+              cursor="pointer"
+              onClick={goBack}
+              data-hotkey="ArrowLeft"
+            />
+            <Box
+              position="absolute"
+              top={0}
+              left="50%"
+              bottom={0}
+              right={0}
+              cursor="pointer"
+              onClick={goNext}
+              data-hotkey="ArrowRight"
+            />
+          </Box>
+          {BottomBar && <BottomBar currentStory={currentStoryId + 1} storiesCount={children.length} />}
         </Flex>
       </Flex>
     </AspectRatio>
