@@ -10,11 +10,14 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
 const icons_1 = require("@chakra-ui/icons");
 const react_1 = require("@chakra-ui/react");
-const Stories_1 = require("../Stories");
+const Stories_1 = __importDefault(require("../Stories"));
 const ModalStories = (_a) => {
     var { isOpen, onClose } = _a, rest = __rest(_a, ["isOpen", "onClose"]);
     return ((0, jsx_runtime_1.jsxs)(react_1.Modal, Object.assign({ isOpen: isOpen, onClose: onClose, motionPreset: "slideInBottom" }, { children: [(0, jsx_runtime_1.jsx)(react_1.ModalOverlay, {}), (0, jsx_runtime_1.jsx)(react_1.IconButton, { position: "absolute", top: "1rem", right: "1rem", icon: (0, jsx_runtime_1.jsx)(icons_1.CloseIcon, {}), "aria-label": "Close", zIndex: 1401, onClick: onClose, borderRadius: "50%", variant: "outline", colorScheme: "teal", color: "teal.300", size: "sm" }), (0, jsx_runtime_1.jsx)(react_1.ModalContent, Object.assign({ backgroundColor: "transparent", boxShadow: "none" }, { children: (0, jsx_runtime_1.jsx)(Stories_1.default, Object.assign({}, rest)) }))] })));

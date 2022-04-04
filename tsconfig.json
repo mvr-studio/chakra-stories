@@ -2,6 +2,8 @@
   "compilerOptions": {
     "target": "es2016",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "strict": true,
     "module": "ESNext",
