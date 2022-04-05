@@ -20,7 +20,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
-import { Box, Flex, HStack } from '@chakra-ui/react';
+import { Box, Flex, HStack, Stack } from '@chakra-ui/react';
 import { install } from '@github/hotkey';
 import { motion, useAnimation } from 'framer-motion';
 const MotionBox = motion(Box);
@@ -35,10 +35,12 @@ const Stories = (_a) => {
     const TopBar = components === null || components === void 0 ? void 0 : components.renderTopBar;
     const BottomBar = components === null || components === void 0 ? void 0 : components.renderBottomBar;
     const indicatorAnimation = useAnimation();
-    const runIndicatorAnimation = () => __awaiter(void 0, void 0, void 0, function* () {
-        indicatorAnimation.set({
-            width: '1%'
-        });
+    const runIndicatorAnimation = (setInitial = true) => __awaiter(void 0, void 0, void 0, function* () {
+        if (setInitial) {
+            indicatorAnimation.set({
+                width: '1%'
+            });
+        }
         yield indicatorAnimation.start({
             width: '100%',
             transition: {
@@ -83,12 +85,14 @@ const Stories = (_a) => {
         run();
         return () => indicatorAnimation.stop();
     }, [currentStoryId]);
-    return (_jsxs(Flex, Object.assign({ direction: "column", backgroundColor: "white", borderRadius: "1rem", position: "relative" }, rest, { children: [_jsx(HStack, Object.assign({ width: "100%", padding: "0.5rem 0.75rem" }, { children: children.map((_, storyId) => {
-                    const activeOrShown = isStoryActive(storyId) || wasStoryShown(storyId);
-                    const indicatorColor = activeOrShown
-                        ? (indicator === null || indicator === void 0 ? void 0 : indicator.activeColor) || 'teal.400'
-                        : (indicator === null || indicator === void 0 ? void 0 : indicator.inactiveColor) || 'gray.200';
-                    return (_jsx(Box, Object.assign({ flex: 1, padding: "0.5rem 0.125rem", cursor: "pointer", onClick: () => changeStory(storyId) }, { children: _jsx(Box, Object.assign({ height: "0.25rem", backgroundColor: (indicator === null || indicator === void 0 ? void 0 : indicator.inactiveColor) || 'gray.200', borderRadius: "0.25rem", position: "relative" }, { children: _jsx(MotionBox, { height: "0.25rem", backgroundColor: indicatorColor, borderRadius: "0.25rem", position: "absolute", top: 0, left: 0, width: wasStoryShown(storyId) || !storyDuration ? '100%' : '1%', animate: isStoryActive(storyId) ? indicatorAnimation : null }) })) }), storyId));
-                }) })), _jsxs(Flex, Object.assign({ direction: "column", flex: 1, position: "relative", width: "100%", padding: "0 1rem" }, { children: [TopBar && _jsx(TopBar, { currentStory: currentStoryId + 1, storiesCount: children.length }), _jsxs(Box, Object.assign({ flex: 1, position: "relative" }, { children: [children[currentStoryId], _jsx(Box, { position: "absolute", top: 0, left: 0, bottom: 0, right: "50%", cursor: "pointer", onClick: !isDragging ? goBack : undefined, "data-hotkey": "ArrowLeft" }), _jsx(Box, { position: "absolute", top: 0, left: "50%", bottom: 0, right: 0, cursor: "pointer", "data-hotkey": "ArrowRight", onClick: !isDragging ? goNext : undefined })] })), BottomBar && _jsx(BottomBar, { currentStory: currentStoryId + 1, storiesCount: children.length })] }))] })));
+    return (_jsxs(Flex, Object.assign({ direction: "column", backgroundColor: "white", borderRadius: [0, '1rem', '1rem'], position: "relative", "data-testid": "chakraStories.storiesContainer" }, rest, { children: [_jsxs(Box, Object.assign({ position: "sticky", top: 0, backgroundColor: "white", zIndex: 1, paddingTop: "1rem" }, { children: [_jsx(HStack, Object.assign({ width: "100%", position: "sticky", backgroundColor: "white" }, { children: children.map((_, storyId) => {
+                            const activeOrShown = isStoryActive(storyId) || wasStoryShown(storyId);
+                            const indicatorColor = activeOrShown
+                                ? (indicator === null || indicator === void 0 ? void 0 : indicator.activeColor) || 'teal.400'
+                                : (indicator === null || indicator === void 0 ? void 0 : indicator.inactiveColor) || 'gray.200';
+                            return (_jsx(Box, Object.assign({ flex: 1, padding: "0.5rem 0", cursor: "pointer", onClick: () => changeStory(storyId) }, { children: _jsx(Box, Object.assign({ height: "0.25rem", backgroundColor: (indicator === null || indicator === void 0 ? void 0 : indicator.inactiveColor) || 'gray.200', borderRadius: "0.25rem", position: "relative", "data-testid": "chakraStories.indicator", "data-cs-active": isStoryActive(storyId), "data-cs-shown": wasStoryShown(storyId) }, { children: _jsx(MotionBox, { height: "0.25rem", backgroundColor: indicatorColor, borderRadius: "0.25rem", position: "absolute", top: 0, left: 0, width: wasStoryShown(storyId) || !storyDuration ? '100%' : '1%', animate: isStoryActive(storyId) ? indicatorAnimation : null, css: {
+                                            transition: 'background-color 0.2s ease-out'
+                                        } }) })) }), storyId));
+                        }) })), TopBar && (_jsx(Box, Object.assign({ marginTop: "0.5rem" }, { children: _jsx(TopBar, { currentStory: currentStoryId + 1, storiesCount: children.length }) })))] })), _jsx(Stack, Object.assign({ flex: 1, overflow: "scroll", marginTop: "0.5rem", paddingBottom: "2rem" }, { children: _jsxs(Box, Object.assign({ flex: 1, position: "relative", overflow: "scroll" }, { children: [_jsx(Box, { children: children[currentStoryId] }), _jsx(Box, { position: "absolute", top: 0, left: 0, bottom: 0, right: "50%", cursor: "pointer", onClick: !isDragging ? goBack : undefined, "data-hotkey": "ArrowLeft", "data-testid": "chakraStories.goBack" }), _jsx(Box, { position: "absolute", top: 0, left: "50%", bottom: 0, right: 0, cursor: "pointer", "data-hotkey": "ArrowRight", onClick: !isDragging ? goNext : undefined, "data-testid": "chakraStories.goNext" })] })) })), BottomBar && (_jsx(Box, Object.assign({ position: "sticky", bottom: 0, backgroundColor: "white" }, { children: _jsx(BottomBar, { currentStory: currentStoryId + 1, storiesCount: children.length }) })))] })));
 };
 export default Stories;

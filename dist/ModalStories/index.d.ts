@@ -6,6 +6,7 @@ interface ModalStoriesProps extends StoriesProps {
     onClose: () => void;
     modalContentProps?: ModalContentProps;
     onDragUp?: (args: ComponentCallbackArgs) => void;
+    aspectRatio?: number;
 }
-declare const ModalStories: ({ isOpen, onClose, modalContentProps, onDragUp, children, ...rest }: ModalStoriesProps) => JSX.Element;
+declare const ModalStories: ({ isOpen, onClose, modalContentProps, onDragUp, children, aspectRatio, ...rest }: ModalStoriesProps) => JSX.Element;
 export default ModalStories;
